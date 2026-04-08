@@ -20,7 +20,7 @@ from corr_clust.treewidth import tree_sizes,weak_corrCl_boundedTreewidth as weak
 ###################################################################
 
 def tarjan_bridge( G ):
-	sys. setrecursionlimit(len(G.nodes)*10)
+	sys.setrecursionlimit(len(G.nodes)*10)
 	bridges=[]; discon=[]; # mi output
 	my_time:int = 0;
 	min_time = {}; in_time = {}
@@ -138,9 +138,10 @@ def generic_reduction( G, my_join, my_solve ) -> dict[str,int]:
 
 def weak_solve( G ) -> tuple[dict[str,int],int]:
 	cl:dict[str,int];
+	assert len(G.nodes)<=10 or tree_sizes(G)<13
 	if ( len(G.nodes) <= 10 ):
 		cl = weak_brute( G );
-	elif ( tree_sizes(G) < 12 ):
+	elif ( tree_sizes(G) < 13 ):
 		cl = weak_tree( G )
 	elif ( len(G.nodes) <= 30 ):
 		cl = lp_cluster( G )
